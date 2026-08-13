@@ -44,7 +44,7 @@ jobs:
         run: |
           {
             echo "workflows<<EOF"
-            curl -L --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github+json; charset=utf-8' 'https://api.github.com/repos/johnalpha911/PersistenceAPI/actions/runs?per_page=1&status=success&branch=main'
+            curl -L --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github+json; charset=utf-8' 'https://api.github.com/repos/johnalpha911/PersistenceAPI/actions/runs?per_page=1&status=success&branch=master'
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
   
