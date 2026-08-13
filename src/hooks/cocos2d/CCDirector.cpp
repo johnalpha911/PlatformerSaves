@@ -8,19 +8,40 @@ using namespace geode::prelude;
 using namespace persistenceAPI;
 using namespace util::platform;
 
-#if defined(GEODE_IS_WINDOWS)
-    #define DIDCLICK_OFFSET 0x6a3048
-#elif defined(GEODE_IS_ANDROID64)
-    #define DIDCLICK_OFFSET 0x12114a1
-#elif defined(GEODE_IS_ANDROID32)
-    #define DIDCLICK_OFFSET 0xaac0fd
-#elif defined(GEODE_IS_ARM_MAC)
-    #define DIDCLICK_OFFSET 0x8b0f4c
-#elif defined(GEODE_IS_INTEL_MAC)
-    #define DIDCLICK_OFFSET 0x98bf1c
-#elif defined(GEODE_IS_IOS)
-    #define DIDCLICK_OFFSET 0x87a240
-#endif
+// ---------------------------------------------------------------------------
+// UNRESOLVED FOR 2.2081 -- REQUIRES REVERSE ENGINEERING
+//
+// DIDCLICK_OFFSET is the raw address of a global "didClick" flag used by
+// LevelSelectLayer to gate re-entering a level. It is *data*, not a function,
+// so Geode's bindings cannot resolve it and no binding exists for it.
+//
+// The values below were derived for GD 2.2074 and are NOT valid for 2.2081.
+// They are deliberately left commented out: writing a byte through a stale
+// absolute address corrupts whatever now lives there, which is far worse than
+// the bug that skipping the write causes.
+//
+// KNOWN CONSEQUENCE OF LEAVING THIS DISABLED:
+//   After cancelling a level load from the main level-select screen, the flag
+//   stays set, so re-entering that level by *button* (not by click) may not
+//   respond until the scene changes. Cosmetic/UX only -- no data loss, no
+//   corruption, saves are unaffected.
+//
+// TO RE-ENABLE: re-derive the address for each of the six targets on 2.2081
+// and uncomment. Do not guess or scale the old values.
+// ---------------------------------------------------------------------------
+// #if defined(GEODE_IS_WINDOWS)
+//     #define DIDCLICK_OFFSET 0x6a3048   // 2.2074 -- STALE
+// #elif defined(GEODE_IS_ANDROID64)
+//     #define DIDCLICK_OFFSET 0x12114a1  // 2.2074 -- STALE
+// #elif defined(GEODE_IS_ANDROID32)
+//     #define DIDCLICK_OFFSET 0xaac0fd   // 2.2074 -- STALE
+// #elif defined(GEODE_IS_ARM_MAC)
+//     #define DIDCLICK_OFFSET 0x8b0f4c   // 2.2074 -- STALE
+// #elif defined(GEODE_IS_INTEL_MAC)
+//     #define DIDCLICK_OFFSET 0x98bf1c   // 2.2074 -- STALE
+// #elif defined(GEODE_IS_IOS)
+//     #define DIDCLICK_OFFSET 0x87a240   // 2.2074 -- STALE
+// #endif
 
 // overrides
 
@@ -113,7 +134,12 @@ bool PSCCDirector::replaceScene(CCScene* i_scene) {
                 }
                 // didClick
                 // it's for when trying to use a button to get into the level instead of click
-                *reinterpret_cast<uint8_t*>(geode::base::get()+DIDCLICK_OFFSET) = 0;
+                #if defined(DIDCLICK_OFFSET)
+                    *reinterpret_cast<uint8_t*>(geode::base::get()+DIDCLICK_OFFSET) = 0;
+                #else
+                    // See the note at the top of this file: offset not yet
+                    // re-derived for 2.2081, so this reset is skipped.
+                #endif
             }
 
             LevelAreaInnerLayer* l_levelAreaInnerLayer = static_cast<LevelAreaInnerLayer*>(CCScene::get()->getChildByID("LevelAreaInnerLayer"));

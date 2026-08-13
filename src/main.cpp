@@ -1,26 +1,16 @@
-#if !defined(GEODE_IS_IOS)
 #include <Geode/Geode.hpp>
-#include <geode.custom-keybinds/include/Keybinds.hpp>
-#include <sabe.persistenceapi/include/PersistenceAPI.hpp>
+#include <hooks/PlayLayer.hpp>
 
 using namespace geode::prelude;
-using namespace persistenceAPI;
-
-void setupKeybinds();
 
 $on_mod(Loaded) {
-    setupKeybinds();
+    // Keybinds are declared in mod.json as a "keybind" setting since Geode v5.
+    // The geode.custom-keybinds developer API was removed when keybinds moved
+    // into Geode itself, so BindManager/registerBindable no longer exist.
+    //
+    // The listener is registered ONCE here, globally. It must not be registered
+    // per-PlayLayer: listenForKeybindSettingPresses leaks its ListenerHandle by
+    // design, so calling it in PlayLayer::init would stack up a new listener on
+    // every level start and fire the save callback N times.
+    setupSaveKeybindListener();
 }
-
-void setupKeybinds() {
-    using namespace keybinds;
-
-    BindManager::get()->registerBindable({
-        "save-game"_spr,
-        "Save game",
-        "Hotkey for quick saving",
-        { Keybind::create(KEY_K, Modifier::None) },
-        Category::PLAY,
-    });
-}
-#endif

@@ -184,11 +184,6 @@ public:
         return i_object->m_uniqueID-l_uniqueIDBase;
     }
 
-    // TODO: Support on Ios
-    #if !defined(GEODE_IS_IOS)
-    void setupKeybinds();
-    #endif
-
     void setupSavingProgressCircleSprite();
 
     void showSavingProgressCircleSprite(bool i_show);
@@ -213,3 +208,8 @@ public:
 
     bool makeBackup();
 };
+
+// Registers the global "save-game" keybind listener. Call exactly once, from
+// $on_mod(Loaded). Works on every platform, including iOS -- the old iOS
+// exclusion existed only because geode.custom-keybinds was unavailable there.
+void setupSaveKeybindListener();

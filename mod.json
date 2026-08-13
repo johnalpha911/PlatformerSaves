@@ -1,17 +1,19 @@
 {
-	"geode": "4.9.0",
+	"geode": "5.4.1",
 	"gd": {
-		"win": "2.2074",
-		"android": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
 	},
-	"version": "v1.1.2",
+	"version": "v1.2.0",
 	"id": "sabe.platformersaves",
 	"name": "PlatformerSaves",
 	"developer": "Sabe",
 	"description": "Save and load your progress in platformer levels!",
-	"repository": "https://github.com/0x5abe/PlatformerSaves",
+	"links": {
+		"source": "https://github.com/0x5abe/PlatformerSaves"
+	},
 	"resources": {
 		"sprites": [
 			"resources/saveButton.png"
@@ -22,25 +24,15 @@
 		"gameplay"
 	],
 	"dependencies": {
-		"geode.custom-keybinds": {
-			"version": ">=v1.6.0",
-			"platforms": [
-				"win",
-				"android",
-				"mac-intel",
-                "mac-arm"
-			],
-			"importance": "required"
-		},
 		"geode.node-ids": {
-			"version": ">=v1.12.0-beta.4",
-			"importance": "required"
+			"version": ">=v1.23.3",
+			"required": true
 		},
 		"sabe.persistenceapi": {
-			"version": "v1.1.0",
-			"importance": "required"
+			"version": ">=v1.2.0",
+			"required": true
 		}
-    },
+	},
 	"settings": {
 		"auto-save": {
 			"default": true,
@@ -77,13 +69,20 @@
 			"name": "Updated save file warning",
 			"description": "Show a warning when opening a save file that was updated from a previous PlatformerSaves version.",
 			"type": "bool"
+		},
+		"save-game": {
+			"type": "keybind",
+			"name": "Save game",
+			"description": "Hotkey for quick saving.",
+			"default": "K",
+			"category": "gameplay",
+			"migrate-from": "sabe.platformersaves/save-game"
 		}
 	},
-	"incompatibilities": [
-		{
-			"id": "thesillydoggo.moretags",
-			"importance": "breaking",
-			"version": "*"
+	"incompatibilities": {
+		"thesillydoggo.moretags": {
+			"version": "*",
+			"breaking": true
 		}
-	]
+	}
 }

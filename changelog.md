@@ -1,3 +1,11 @@
+## v1.2.0
+
+* Updated for Geometry Dash 2.2081 and Geode v5
+* Migrated the quick-save hotkey to Geode's built-in keybind system; Custom Keybinds is no longer a dependency and existing bindings are migrated automatically
+* Quick-save hotkey now works on iOS
+* Removed a hardcoded memory offset that is no longer needed (PersistenceAPI handles it) and disabled a second one that is not yet valid on 2.2081
+* Requires PersistenceAPI v1.2.0 or newer
+
 ## v1.1.1
 
 * Fixed a bug that caused incorrect song to play when loading a save
