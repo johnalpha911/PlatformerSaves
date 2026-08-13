@@ -70,6 +70,10 @@ bool PSPlayLayer::init(GJGameLevel* i_level, bool i_useReplay, bool i_dontCreate
 void PSPlayLayer::processCreateObjectsFromSetup() {
     if (!m_fields->m_startedLoadingObjects) {
         m_fields->m_startedLoadingObjects = true;
+        GameObject::resetMID();
+        reinterpret_cast<persistenceAPI::PAPlayLayer*>(this)->m_fields->m_uniqueIDBase = 12;
+        GameObject::resetMID();
+        reinterpret_cast<persistenceAPI::PAPlayLayer*>(this)->m_fields->m_uniqueIDBase = 12;
         // The unique-ID counter reset and m_uniqueIDBase assignment that used to
         // happen here are now done by PersistenceAPI in PAPlayLayer::init(), via
         // GameObject::resetMID(). See the note at the top of this file.
