@@ -1,10 +1,10 @@
 #pragma once
+#ifndef GEODE_IS_IOS
 #include "Geode/cocos/robtop/keyboard_dispatcher/CCKeyboardDelegate.h"
 #include <Geode/Geode.hpp>
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
 #include <sabe.persistenceapi/include/PersistenceAPI.hpp>
 
-#ifndef GEODE_IS_IOS
 
 extern size_t s_levelInfoLayerDelegate1;
 extern size_t s_levelInfoLayerDelegate2;
