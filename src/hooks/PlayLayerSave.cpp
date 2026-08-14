@@ -50,6 +50,7 @@ void PSPlayLayer::writePSFHeader() {
 }
 
 void PSPlayLayer::saveGame() {
+log::info("PSDBG save state={} cps={}", (int)m_fields->m_savingState, m_fields->m_normalModeCheckpoints ? m_fields->m_normalModeCheckpoints->count() : -1);
     //log::info("SaveGame Gets run");
     switch (m_fields->m_savingState) {
         case SavingState::Setup: {

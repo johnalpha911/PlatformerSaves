@@ -89,6 +89,7 @@ void PSPlayLayer::createObjectsFromSetupFinished() {
 
 void PSPlayLayer::setupHasCompleted() {
     //log::info("[setupHasCompleted] begin");
+    if (m_objects && m_objects->count() > 0) { log::info("PSDBG count={} first={} last={} base={}", m_objects->count(), static_cast<GameObject*>(m_objects->objectAtIndex(0))->m_uniqueID, static_cast<GameObject*>(m_objects->objectAtIndex(m_objects->count()-1))->m_uniqueID, reinterpret_cast<persistenceAPI::PAPlayLayer*>(this)->m_fields->m_uniqueIDBase); }
     if (!m_isPlatformer) {
         m_fields->m_loadingState = LoadingState::Ready;
     }
