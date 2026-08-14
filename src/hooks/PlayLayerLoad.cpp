@@ -27,7 +27,7 @@ bool PSPlayLayer::readPSFVersionAndUpdateIfNecessary() {
         }
         return l_updateSucceded;
     }
-    m_fields->m_stream.setPAVersion(3);
+    m_fields->m_stream.setPAVersion(2);
     return true;
 }
 

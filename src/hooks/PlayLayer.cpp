@@ -443,12 +443,6 @@ bool PSPlayLayer::updatePSFFormat() {
             m_fields->m_stream.seek(sizeof(s_psfMagicAndVer));
             return true;
         }
-        case 10:
-        case 11: {
-            m_fields->m_stream.setPAVersion(2);
-            m_fields->m_stream.seek(sizeof(s_psfMagicAndVer));
-            return true;
-        }
         default: {
             m_fields->m_stream.seek(sizeof(s_psfMagicAndVer));
             return false;
