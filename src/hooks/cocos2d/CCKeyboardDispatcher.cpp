@@ -2,6 +2,8 @@
 #include "Geode/cocos/robtop/keyboard_dispatcher/CCKeyboardDispatcher.h"
 #include <hooks/PlayLayer.hpp>
 
+#ifndef GEODE_IS_IOS
+
 using namespace geode::prelude;
 using namespace persistenceAPI;
 
@@ -17,3 +19,4 @@ void PSCCKeyboardDispatcher::removeDelegate(cocos2d::CCKeyboardDelegate* i_deleg
     }
     CCKeyboardDispatcher::removeDelegate(i_delegate);
 }
+#endif
