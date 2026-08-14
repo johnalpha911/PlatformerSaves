@@ -33,7 +33,7 @@ target_compile_definitions(${PROJECT_NAME}
       $<$<CONFIG:MinSizeRel>:PS_RELEASE>
 )
 
-option(WITH_PS_DESCRIBE "Log in depth info for saved/loaded classes" OFF)
+option(WITH_PS_DESCRIBE "Log in depth info for saved/loaded classes" ON)
 option(WITH_PS_SEPARATORS "Add separators between saved fields for debugging purposes" OFF)
 
 if(WITH_PS_DESCRIBE)
