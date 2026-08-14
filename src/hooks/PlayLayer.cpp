@@ -170,6 +170,7 @@ void PSPlayLayer::postUpdate(float i_unkFloat) {
 CheckpointObject* PSPlayLayer::markCheckpoint() {
     PSCheckpointObject* l_checkpointObject = static_cast<PSCheckpointObject*>(PlayLayer::markCheckpoint());
 
+    log::info("PSDBG cp obj={} en={} post={} prac={} tried={} act={}", l_checkpointObject != nullptr, savesEnabled(), m_fields->m_inPostUpdate, m_isPracticeMode, m_fields->m_triedPlacingCheckpoint, m_activatedCheckpoint != nullptr);
     if (l_checkpointObject && savesEnabled() && m_fields->m_inPostUpdate && !m_isPracticeMode) {
         if (m_fields->m_triedPlacingCheckpoint) {
             m_fields->m_triedPlacingCheckpoint = false;
