@@ -152,7 +152,8 @@ void PSPlayLayer::setupHasCompleted() {
 }
 
 void PSPlayLayer::postUpdate(float i_unkFloat) {
-    m_fields->m_inPostUpdate = true;
+&
+    { static int s_pu = 0; if (s_pu < 3) { log::info("PSDBG pu fired"); s_pu++; } }
     m_fields->m_triedPlacingCheckpoint = m_tryPlaceCheckpoint;
 
     PlayLayer::postUpdate(i_unkFloat);
