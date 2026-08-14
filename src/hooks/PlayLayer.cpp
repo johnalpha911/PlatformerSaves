@@ -26,7 +26,7 @@ using namespace util::platform;
 
 // Max PSF version is 31 cause after that bitfield is broken
 PSPlayLayer* s_currentPlayLayer = nullptr;
-char s_psfMagicAndVer[] = "PSF v0.1.1";
+char s_psfMagicAndVer[] = "PSF v0.1.2";
 int s_psfVersion = 12;
 
 // overrides
